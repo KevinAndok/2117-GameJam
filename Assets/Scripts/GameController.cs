@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using DG.Tweening;
 
@@ -9,6 +10,8 @@ public class GameController : MonoBehaviour
     public static float fadeSpeed = 3f;
     public float _fadeSpeed = 3f;
     public float _roundMaxTime = 50;
+
+    public Text timerText;
 
     public delegate void StartTimer();
     public static StartTimer startTimer;
@@ -38,6 +41,7 @@ public class GameController : MonoBehaviour
         {
             yield return new WaitForFixedUpdate();
             roundTimer += Time.fixedDeltaTime;
+            timerText.text = Mathf.Clamp((_roundMaxTime - roundTimer), 0, 100).ToString();
         }
         if (!levelFinished) 
             LevelFailed();

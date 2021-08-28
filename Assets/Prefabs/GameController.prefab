@@ -45,6 +45,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _fadeSpeed: 3
+  _roundMaxTime: 10
+  timerText: {fileID: 0}
 --- !u!114 &6330662480649284583
 MonoBehaviour:
   m_ObjectHideFlags: 0
