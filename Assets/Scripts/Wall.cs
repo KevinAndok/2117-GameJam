@@ -40,7 +40,7 @@ public class Wall : MonoBehaviour
         {
             if (trampolineRoutine == null)
             {
-                collision.gameObject.GetComponent<Rigidbody2D>().velocity += Vector2.up * trampolineForce;
+                collision.gameObject.GetComponent<Rigidbody2D>().velocity += (Vector2)transform.up * trampolineForce;
                 trampolineRoutine = StartCoroutine(Trampoline());
             }
         }
