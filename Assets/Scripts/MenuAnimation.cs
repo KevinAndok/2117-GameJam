@@ -153,7 +153,7 @@ public class MenuAnimation : MonoBehaviour
         yield return new WaitForSeconds(1.3f);
 
         float f = 0f;
-        DOTween.To(() => f, x => f = x, 1f, 0.6f).OnUpdate(() => Fades.fadeOutCounter = f).OnComplete(() =>
+        DOTween.To(() => f, x => f = x, 1f, 0.8f).OnUpdate(() => Fades.fadeOutCounter = f).OnComplete(() =>
             SceneManager.LoadScene(1)
         );
 
