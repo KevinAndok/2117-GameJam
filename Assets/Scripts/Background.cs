@@ -13,7 +13,7 @@ public class Background : MonoBehaviour
     public Transform farBackground;
     public float farCoefficient;
 
-    private void Update()
+    private void LateUpdate()
     {
         nearestBackground.position = Camera.main.transform.position / nearestCoefficient;
 
