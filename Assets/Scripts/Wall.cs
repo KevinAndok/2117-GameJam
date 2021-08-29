@@ -1,15 +1,15 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Wall : MonoBehaviour
 {
-    public enum WallType { basic, glass, rotating, trampoline };
+    public enum WallType { basic, glass, rotating, trampoline, boost };
     public WallType type;
 
     public float rotationSpeed = 1;
     public float destroyTime = .1f;
     public float trampolineForce = 5;
+    public float boostPower = 1.5f;
 
     Coroutine trampolineRoutine = null;
 
@@ -34,6 +34,10 @@ public class Wall : MonoBehaviour
                 collision.gameObject.GetComponent<Rigidbody2D>().velocity += Vector2.up * trampolineForce;
                 trampolineRoutine = StartCoroutine(Trampoline());
             }
+        }
+        else if (type == WallType.boost)
+        {
+            collision.gameObject.GetComponent<Rigidbody2D>().velocity *= boostPower;
         }
     }
 
