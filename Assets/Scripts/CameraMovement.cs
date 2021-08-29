@@ -11,6 +11,7 @@ public class CameraMovement : MonoBehaviour
 
     float cameraSpeed = 1;
     public float minCamSize = 1, maxCamSize = 10;
+    public Transform objectToFollow = null;
 
     Camera cam;
     Vector2 mousePosDelta;
@@ -51,15 +52,23 @@ public class CameraMovement : MonoBehaviour
         float xOffset = (1 + cam.orthographicSize - maxCamSize) * 1.6f / 2 + ((cam.orthographicSize - 1) * .5f * 1.6f);
         float yOffset = (1 + cam.orthographicSize - maxCamSize) / 2 + ((cam.orthographicSize - 1) * .5f);
 
-        transform.position = new Vector3(
-            Mathf.Clamp(transform.position.x + moveX, xOffset, mapSize.x - xOffset),
-            Mathf.Clamp(transform.position.y + moveY, yOffset, mapSize.y - yOffset),
-            transform.position.z);
+        if (!objectToFollow) 
+            transform.position = new Vector3(
+                Mathf.Clamp(transform.position.x + moveX, xOffset, mapSize.x - xOffset),
+                Mathf.Clamp(transform.position.y + moveY, yOffset, mapSize.y - yOffset),
+                transform.position.z);
+        else
+            transform.position = new Vector3(
+                    Mathf.Clamp(objectToFollow.position.x + moveX, xOffset, mapSize.x - xOffset),
+                    Mathf.Clamp(objectToFollow.position.y + moveY, yOffset, mapSize.y - yOffset),
+                    transform.position.z);
 
         mousePosDelta = Input.mousePosition;
 
         cam.orthographicSize = Mathf.Clamp(cam.orthographicSize - Input.mouseScrollDelta.y, minCamSize, maxCamSize);
     }
+
+
 
     void OnDrawGizmos()
     {

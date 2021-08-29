@@ -74,13 +74,8 @@ public class Ball : MonoBehaviour
                 rb.gravityScale = gravityScale;
                 shot = true;
                 GameController.instance.startTimer?.Invoke();
+                Camera.main.GetComponent<CameraMovement>().objectToFollow = transform;
             }
-        }
-        else
-        {
-            var moveTo = Vector3.Lerp(cam.position, transform.position, 1);
-            moveTo.z = cam.position.z;
-            Camera.main.transform.position = moveTo;
         }
     }
 

@@ -13,6 +13,15 @@ public class Wall : MonoBehaviour
 
     Coroutine trampolineRoutine = null;
 
+    public AudioClip[] ballCollisionClips;
+    Coroutine playingBounce;
+    AudioSource audioSource;
+
+    private void Start()
+    {
+        if (!audioSource && !TryGetComponent(out audioSource)) audioSource = gameObject.AddComponent<AudioSource>();
+    }
+
     private void FixedUpdate()
     {
         if (type == WallType.rotating)
@@ -39,6 +48,11 @@ public class Wall : MonoBehaviour
         {
             collision.gameObject.GetComponent<Rigidbody2D>().velocity *= boostPower;
         }
+
+        if (ballCollisionClips.Length > 0)
+        {
+            playingBounce = StartCoroutine(PlayClipWithCooldown(ballCollisionClips[Random.Range(0, ballCollisionClips.Length)]));
+        }
     }
 
     IEnumerator Trampoline()
@@ -55,5 +69,12 @@ public class Wall : MonoBehaviour
             float circleSize = Mathf.Sqrt(Mathf.Pow(transform.localScale.x / 2, 2) + Mathf.Pow(transform.localScale.y / 2, 2));
             Gizmos.DrawWireSphere(transform.position, circleSize);
         }
+    }
+
+    IEnumerator PlayClipWithCooldown(AudioClip clip)
+    {
+        audioSource.PlayOneShot(clip);
+        yield return new WaitForSeconds(clip.length);
+        playingBounce = null;
     }
 }
