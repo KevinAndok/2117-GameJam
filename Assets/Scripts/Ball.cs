@@ -28,7 +28,6 @@ public class Ball : MonoBehaviour
     {
         if (!shot)
         {
-
             Vector2 mouse = Input.mousePosition;
             mouse = Camera.main.ScreenToWorldPoint(mouse);
             Vector2 dir = mouse - (Vector2)transform.position;
@@ -74,7 +73,7 @@ public class Ball : MonoBehaviour
                 rb.AddForce(dir * speed * powerIncrement, ForceMode2D.Impulse);
                 rb.gravityScale = gravityScale;
                 shot = true;
-                GameController.startTimer.Invoke();
+                GameController.instance.startTimer?.Invoke();
             }
         }
         else

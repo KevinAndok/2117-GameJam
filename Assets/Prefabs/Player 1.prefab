@@ -387,7 +387,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dee41926abfa014eab091f094753a99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
+  speed: 3
   gravityScale: 2
   powerBar: {fileID: 7901330288558482899}
   powerSprites:

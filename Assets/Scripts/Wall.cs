@@ -9,6 +9,9 @@ public class Wall : MonoBehaviour
 
     public float rotationSpeed = 1;
     public float destroyTime = .1f;
+    public float trampolineForce = 5;
+
+    Coroutine trampolineRoutine = null;
 
     private void FixedUpdate()
     {
@@ -26,8 +29,18 @@ public class Wall : MonoBehaviour
         }
         else if (type == WallType.trampoline)
         {
-            collision.gameObject.GetComponent<Rigidbody2D>().velocity *= 1.5f;
+            if (trampolineRoutine == null)
+            {
+                collision.gameObject.GetComponent<Rigidbody2D>().velocity += Vector2.up * trampolineForce;
+                trampolineRoutine = StartCoroutine(Trampoline());
+            }
         }
+    }
+
+    IEnumerator Trampoline()
+    {
+        yield return new WaitForSeconds(.1f);
+        trampolineRoutine = null;
     }
 
     private void OnDrawGizmos()

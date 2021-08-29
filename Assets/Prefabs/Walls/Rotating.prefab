@@ -97,8 +97,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 2
-  rotationSpeed: 45
+  rotationSpeed: 120
   destroyTime: 0.1
+  trampolineForce: 5
 --- !u!70 &5607851807537657222
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
