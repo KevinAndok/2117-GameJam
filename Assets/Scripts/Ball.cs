@@ -7,6 +7,7 @@ public class Ball : MonoBehaviour
 
     public SpriteRenderer powerBar;
     public Sprite[] powerSprites;
+    public AudioClip levelCompleteSound;
 
     int powerIncrement = 1;
     bool shot;
@@ -15,9 +16,11 @@ public class Ball : MonoBehaviour
     Transform robot;
     Transform hand;
     Transform cam;
+    AudioSource audioSource;
 
     private void Awake()
     {
+        audioSource = GetComponentInParent<AudioSource>();
         cam = Camera.main.transform;
         hand = transform.parent;
         robot = hand.parent;
@@ -84,6 +87,7 @@ public class Ball : MonoBehaviour
         if (collision.tag == "finish") 
         {
             GameController.LevelComplete();
+            audioSource.PlayOneShot(levelCompleteSound);
         }
     }
 }
